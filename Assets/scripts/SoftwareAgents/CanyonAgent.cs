@@ -65,22 +65,26 @@ public class CanyonAgent
             // create left moutain
             while (isInMap(tempPos) && left > 0)
             {
-                heightmap[tempPos[0], tempPos[1]] = canyonDepth; // moutain will rise 1.5
+                heightmap[tempPos[0], tempPos[1]] = canyonDepth; // canyon will lower the surface
+                // Debug.Log("height map: " + heightmap[tempPos[0], tempPos[1]]);
                 tempPos[0] -= 1;
                 left -= 1;
             }
             // create moutain left slope
             int blurCount = blurWidth;
             float currentHeight = canyonDepth;
-            float interval = canyonDepth / blurWidth;
+            float interval = (1.0f-canyonDepth) / blurWidth;
             while (isInMap(tempPos) && blurCount > 0)
             {
                 currentHeight += interval + (rand.Next(0, 100) - 50) / 500.0f;
-                heightmap[tempPos[0], tempPos[1]] = currentHeight;
+                // Debug.Log("Current Height: " + currentHeight);
+                if (currentHeight < heightmap[tempPos[0], tempPos[1]])
+                    heightmap[tempPos[0], tempPos[1]] = currentHeight;
                 tempPos[0] -= 1;
                 blurCount -= 1;
             }
             // create right moutain
+            // back to start point
             tempPos[0] = position[0];
             tempPos[1] = position[1];
             while (isInMap(tempPos) && right > 0)
@@ -92,13 +96,14 @@ public class CanyonAgent
             // create right slope
             blurCount = blurWidth;
             currentHeight = canyonDepth;
-            interval = canyonDepth / blurWidth;
+            interval = (1.0f - canyonDepth) / blurWidth;
             while (isInMap(tempPos) && blurCount > 0)
             {
                 // Debug.Log("Interval: " + interval);
                 // Debug.Log("Random: " + ((rand.Next(0, 100) - 50) / 500.0f));
                 currentHeight += interval + (rand.Next(0, 100) - 50) / 500.0f; // make the slope more natural
-                heightmap[tempPos[0], tempPos[1]] = currentHeight;
+                if(currentHeight < heightmap[tempPos[0], tempPos[1]])
+                    heightmap[tempPos[0], tempPos[1]] = currentHeight;
                 tempPos[0] += 1;
                 blurCount -= 1;
             }

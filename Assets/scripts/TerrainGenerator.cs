@@ -101,8 +101,8 @@ public class TerrainGenerator : MonoBehaviour
         SmoothAgent sa = new SmoothAgent(numberOfSmoothAgent, heights, tokenOfSmoothAgent, rand);
         heights = sa.run();
 
-        CanyonAgent ca = new CanyonAgent(6, heights, 1, rand);
-        ca.run();
+        CanyonAgent ca = new CanyonAgent(10, heights, 1, rand);
+        heights = ca.run();
 
         if (postSmooth)
         {
