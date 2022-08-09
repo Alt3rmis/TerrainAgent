@@ -16,19 +16,24 @@ public class TerrainGenerator : MonoBehaviour
         Canyon,
         Desert,
         Hill,
-        Moutain,
+        // Moutain,
     }
     public TerrainType type;
 
     // crossoverable parameters
+    [Header("SmoothAgent")]
     public int numberOfSmoothAgent = 500;
     public int tokenOfSmoothAgent = 100;
 
+    [Header("MoutainAgent")]
     public int numberOfMoutainAgent = 5;
-
     public int brushWidth = 0;
     public int tokenOfMoutainAgent = 10;
     public bool postSmooth = false; // smooth after moutain created
+
+    [Header("CanyonAgent")]
+    public int canyonBrushWidth = 4;
+    public bool canyonPostSmooth = false;
     void Start()
     {
 
@@ -53,40 +58,11 @@ public class TerrainGenerator : MonoBehaviour
         {
             terrainData.SetHeights(0, 0, HillGenerator());
         }
-        else if (type == TerrainType.Moutain)
+        /*else if (type == TerrainType.Moutain)
         {
             terrainData.SetHeights(0, 0, MoutainGenerator());
-        }
+        }*/
         return terrainData;
-    }
-
-    float[,] GenerateHeights()
-    {
-        float[,] heights = new float[width, height];
-        // call agents
-        System.Random rand = new System.Random(seed);
-
-        InitAgent ia = new InitAgent(heights, rand);
-        heights = ia.run();
-
-        SmoothAgent sa = new SmoothAgent(numberOfSmoothAgent, heights, tokenOfSmoothAgent, rand);
-        heights = sa.run();
-
-        int count = 0;
-        while (count < numberOfMoutainAgent)
-        {
-            MoutainAgent ma = new MoutainAgent(brushWidth, heights, tokenOfMoutainAgent, rand);
-            heights = ma.run();
-            count++;
-        }
-
-        if (postSmooth)
-        {
-            SmoothAgent sa1 = new SmoothAgent(10, heights, 50, rand);
-            heights = sa1.run();
-        }
-
-        return heights;
     }
 
     private float[,] CanyonGenerator()
@@ -101,15 +77,14 @@ public class TerrainGenerator : MonoBehaviour
         SmoothAgent sa = new SmoothAgent(numberOfSmoothAgent, heights, tokenOfSmoothAgent, rand);
         heights = sa.run();
 
-        CanyonAgent ca = new CanyonAgent(10, heights, 1, rand);
+        CanyonAgent ca = new CanyonAgent(canyonBrushWidth, heights, 32, rand);
         heights = ca.run();
 
-        if (postSmooth)
+        if (canyonPostSmooth)
         {
             SmoothAgent sa1 = new SmoothAgent(10, heights, 50, rand);
             heights = sa1.run();
         }
-
         return heights;
     }
 
@@ -121,6 +96,9 @@ public class TerrainGenerator : MonoBehaviour
 
         InitAgent ia = new InitAgent(heights, rand);
         heights = ia.run();
+
+        SmoothAgent sa = new SmoothAgent(numberOfSmoothAgent, heights, tokenOfSmoothAgent, rand);
+        heights = sa.run();
 
         return heights;
     }
@@ -154,7 +132,7 @@ public class TerrainGenerator : MonoBehaviour
         return heights;
     }
 
-    private float[,] MoutainGenerator()
+    /*private float[,] MoutainGenerator()
     {
         float[,] heights = new float[width, height];
         // call agents
@@ -164,5 +142,5 @@ public class TerrainGenerator : MonoBehaviour
         heights = ia.run();
 
         return heights;
-    }
+    }*/
 }

@@ -28,7 +28,8 @@ public class CanyonAgent
         mapWidth = heightmap.GetLength(0);
         mapHeight = heightmap.GetLength(1);
         position = new int[2];
-        isVertical = false;
+        isVertical = false; // true if move forward to z axis
+        // false forward to x axis
     }
 
     private bool isInMap(int[] position)
@@ -37,15 +38,27 @@ public class CanyonAgent
     }
     public float[,] run()
     {
-        position[0] = rand.Next(0, mapWidth);
-        position[1] = rand.Next(0, mapHeight);
+        //position[0] = rand.Next(0, mapWidth);
+        //position[1] = rand.Next(0, mapHeight);
+        // position[0] = rand.Next(brushWidth, mapWidth - brushWidth);
+        // position[1] = rand.Next(brushWidth, mapHeight - brushWidth);
         if (rand.Next(0, 2) == 0)
         {
             isVertical = true;
         }
-        isVertical = true; // delete in release
+        if(isVertical)
+        {
+            position[0] = rand.Next(brushWidth, mapWidth - brushWidth);
+            position[1] = 1;
+        }
+        else
+        {
+            position[0] = 1;
+            position[1] = rand.Next(brushWidth, mapHeight - brushWidth);
+        }
         while (token > 0 && isInMap(position))
         {
+            // Debug.Log("Token: " + token);
             createCanyon();
             moveForwards();
             token--;
@@ -79,7 +92,11 @@ public class CanyonAgent
                 currentHeight += interval + (rand.Next(0, 100) - 50) / 500.0f;
                 // Debug.Log("Current Height: " + currentHeight);
                 if (currentHeight < heightmap[tempPos[0], tempPos[1]])
+                {
                     heightmap[tempPos[0], tempPos[1]] = currentHeight;
+                    // Debug.Log("Current Height: " + heightmap[tempPos[0], tempPos[1]]);
+                }
+                    
                 tempPos[0] -= 1;
                 blurCount -= 1;
             }

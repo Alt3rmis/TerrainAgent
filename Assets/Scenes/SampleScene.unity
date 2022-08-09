@@ -335,12 +335,12 @@ MonoBehaviour:
   width: 32
   height: 32
   depth: 10
-  seed: 106480
+  seed: 107611
   type: 2
   numberOfSmoothAgent: 50
   tokenOfSmoothAgent: 50
   numberOfMoutainAgent: 3
-  brushWidth: 3
+  brushWidth: 2
   tokenOfMoutainAgent: 10
   postSmooth: 0
 --- !u!154 &1942418047
@@ -396,7 +396,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1942418045}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
