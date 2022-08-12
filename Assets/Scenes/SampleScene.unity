@@ -335,14 +335,16 @@ MonoBehaviour:
   width: 32
   height: 32
   depth: 10
-  seed: 107611
+  seed: 106715
   type: 2
   numberOfSmoothAgent: 50
   tokenOfSmoothAgent: 50
   numberOfMoutainAgent: 3
-  brushWidth: 2
+  brushWidth: 4
   tokenOfMoutainAgent: 10
-  postSmooth: 0
+  postSmooth: 1
+  canyonBrushWidth: 4
+  canyonPostSmooth: 0
 --- !u!154 &1942418047
 TerrainCollider:
   m_ObjectHideFlags: 0

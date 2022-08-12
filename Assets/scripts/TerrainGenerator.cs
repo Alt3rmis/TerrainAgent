@@ -34,6 +34,8 @@ public class TerrainGenerator : MonoBehaviour
     [Header("CanyonAgent")]
     public int canyonBrushWidth = 4;
     public bool canyonPostSmooth = false;
+    public int canyonToken = 32;
+    
     void Start()
     {
 
@@ -72,19 +74,20 @@ public class TerrainGenerator : MonoBehaviour
         System.Random rand = new System.Random(seed);
 
         InitAgent ia = new InitAgent(heights, rand, 70, 100);
+        // InitAgent ia = new InitAgent(heights, rand);
         heights = ia.run();
 
         SmoothAgent sa = new SmoothAgent(numberOfSmoothAgent, heights, tokenOfSmoothAgent, rand);
         heights = sa.run();
 
-        CanyonAgent ca = new CanyonAgent(canyonBrushWidth, heights, 32, rand);
+        CanyonAgent ca = new CanyonAgent(canyonBrushWidth, heights, canyonToken, rand);
         heights = ca.run();
 
-        if (canyonPostSmooth)
+        /*if (canyonPostSmooth)
         {
             SmoothAgent sa1 = new SmoothAgent(10, heights, 50, rand);
             heights = sa1.run();
-        }
+        }*/
         return heights;
     }
 
