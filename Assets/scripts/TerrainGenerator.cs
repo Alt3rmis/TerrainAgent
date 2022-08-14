@@ -6,9 +6,9 @@ public class TerrainGenerator : MonoBehaviour
 {
     // Start is called before the first frame update
     [Header("Global")]
-    public int width = 256;
-    public int height = 256;
-    public int depth = 20;
+    public int width = 32;
+    public int height = 32;
+    public int depth = 10;
     public int seed = 114514;
 
     public enum TerrainType
@@ -22,13 +22,13 @@ public class TerrainGenerator : MonoBehaviour
 
     // crossoverable parameters
     [Header("SmoothAgent")]
-    public int numberOfSmoothAgent = 500;
-    public int tokenOfSmoothAgent = 100;
+    public int numberOfSmoothAgent = 50;
+    public int tokenOfSmoothAgent = 50;
 
     [Header("MoutainAgent")]
-    public int numberOfMoutainAgent = 5;
-    public int brushWidth = 0;
-    public int tokenOfMoutainAgent = 10;
+    public int numberOfMoutainAgent = 4;
+    public int brushWidth = 3;
+    public int tokenOfMoutainAgent = 12;
     public bool postSmooth = false; // smooth after moutain created
 
     [Header("CanyonAgent")]
@@ -79,15 +79,22 @@ public class TerrainGenerator : MonoBehaviour
 
         SmoothAgent sa = new SmoothAgent(numberOfSmoothAgent, heights, tokenOfSmoothAgent, rand);
         heights = sa.run();
+        /*for(int i = 0; i < width; i++)
+        {
+            for(int j = 0; j < height; j++)
+            {
+                heights[i, j] = 1f;
+            }
+        }*/
 
         CanyonAgent ca = new CanyonAgent(canyonBrushWidth, heights, canyonToken, rand);
         heights = ca.run();
-
-        /*if (canyonPostSmooth)
+        
+        if (canyonPostSmooth)
         {
             SmoothAgent sa1 = new SmoothAgent(10, heights, 50, rand);
             heights = sa1.run();
-        }*/
+        }
         return heights;
     }
 
