@@ -4,8 +4,6 @@ There are numerous disciplines in which procedural terrain generation has applic
 
 Mountain agent:
 
-![alt text](https://github.com/Alt3rmis/TerrainAgent/blob/main/Images/Fig1A.png)
-
 <p align="center">
-  <img src="[your_relative_path_here](https://github.com/Alt3rmis/TerrainAgent/blob/main/Images/Fig1A.png)" width="350" title="hover text">
+  <img src="Images/Fig1A.png)" width="350" title="hover text">
 </p>
