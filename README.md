@@ -5,5 +5,6 @@ There are numerous disciplines in which procedural terrain generation has applic
 Mountain agent:
 
 <p align="center">
-  <img src="Images/Fig1A.png)" width="350" title="hover text">
+  
+  <img src="Images/Fig1A.png" width="350" title="hover text">
 </p>
