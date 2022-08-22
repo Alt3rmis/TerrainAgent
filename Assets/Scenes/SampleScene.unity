@@ -335,8 +335,8 @@ MonoBehaviour:
   width: 32
   height: 32
   depth: 10
-  seed: 831
-  type: 0
+  seed: 605
+  type: 2
   numberOfSmoothAgent: 50
   tokenOfSmoothAgent: 50
   numberOfMoutainAgent: 4
